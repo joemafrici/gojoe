@@ -27,5 +27,5 @@ jobs:
           git pull
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
-          npm install --only=prod
+          npm ci
           npm run build
