@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <h1>Joe Mafrici</h1>
+      <h1>Joe Mafrici test workflow change</h1>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/Projects' element={<Projects />} />
