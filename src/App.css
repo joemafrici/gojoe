@@ -1,0 +1,28 @@
+@font-face {
+	font-family: "HackNerdFont";
+	src: local("HackNerdFont-Regular"),
+		url('./assets/fonts/HackNerdFont-Regular.ttf')
+}
+
+body {
+	background-color: #b0c4de;
+	font-family: "HackNerdFont";
+}
+
+.navbar {
+	background-color: #c7c7c7;
+}
+
+.logo {
+	max-width: 10%;
+	height: auto;
+}
+
+.navlist {
+	list-style-type: none;
+	display: flex;
+}
+
+.navlist-item {
+	flex-grow: 1;
+}
