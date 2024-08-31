@@ -4,7 +4,7 @@ const Search: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://gojoe.dev:7878/search?query=${searchQuery}`);
+      const response = await fetch(`http://gojoe.dev:7878/search?query=${searchQuery}`);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
