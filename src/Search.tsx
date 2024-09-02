@@ -3,6 +3,7 @@ const Search: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const listItems = searchResults.map(result => <li>{result}</li>);
+  // hello
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
