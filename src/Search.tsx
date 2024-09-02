@@ -1,6 +1,8 @@
 import { useState } from 'react'
 const Search: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const listItems = searchResults.map(result => <li>{result}</li>);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -10,6 +12,7 @@ const Search: React.FC = () => {
       }
       const json = await response.json();
       console.log(json);
+      setSearchResults(json);
     } catch (err) {
       console.error(err);
     }
@@ -21,6 +24,7 @@ const Search: React.FC = () => {
         <input id='searchQueryInput' name='searchQueryInput' type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)}></input>
         <button type='submit' >Submit</button>
       </form>
+      <ul>{listItems}</ul>
     </>
   );
 };
