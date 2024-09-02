@@ -28,4 +28,4 @@ jobs:
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
           npm ci
-          npm run build
+          npm run dev
