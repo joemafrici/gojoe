@@ -16,6 +16,7 @@ const Search: React.FC = () => {
       }
       const json = await response.json();
       console.log(json);
+      setSearchResults([]);
       setSearchResults(json);
     } catch (err) {
       console.error(err);
