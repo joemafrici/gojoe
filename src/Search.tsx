@@ -32,7 +32,7 @@ const Search: React.FC = () => {
       <ul>{searchResults.map((result, idx) => (
         <li key={idx}>
           <h3>{result.filename}</h3>
-          <p>Similarity: {result.similarity.toFixed(4)} </p>
+          <p>Similarity: {result.similarity} </p>
           <ul>
             {result.snippets.map((snippet, snippetIdx) => (
               <li key={snippetIdx}>{snippet}
