@@ -1,7 +1,7 @@
 @font-face {
 	font-family: "HackNerdFont";
 	src: local("HackNerdFont-Regular"),
-		url('./assets/fonts/HackNerdFont-Regular.ttf')
+		url('../fonts/HackNerdFont-Regular.ttf')
 }
 
 body {

@@ -1,2 +1,0 @@
-# gojoe
-My website

@@ -1,0 +1,18 @@
+{{ define "content"}}
+<form hx-get="/search" hx-target="#search-results" hx-trigger="submit">
+	<input type="text" name="query" placeholder="Enter search query"></input>
+	<button type="submit">Search</button>
+</form>
+<div id="search-results"></div>
+{{end}}
+{{define "search_results"}}
+{{if .}}
+<h2>Search Results</h2>
+{{range .}}
+<p>{{.Filename}} {{.Similarity}}</p>
+{{range .Snippets}}
+<p>{{.}}</p>
+{{end}}
+{{end}}
+{{end}}
+{{end}}

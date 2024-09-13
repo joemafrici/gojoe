@@ -1,0 +1,17 @@
+{{define "navbar"}}
+<nav class='navbar'>
+	<ul class='navlist'>
+		<img class='logo' src='/static/img/gojo.svg' alt='Satoru Gojo'></img>
+		<li class='navlist-item'></li>
+		<li class='navlist-item'>
+			<a href='/' hx-get="/" hx-target="#content">Home</a>
+		</li>
+		<li class='navlist-item'>
+			<a href='/projects' hx-get="/projects" hx-target="#content">Projects</a>
+		</li>
+		<li class='navlist-item'>
+			<a href='/search' hx-get="/search" hx-target="#content">Search</a>
+		</li>
+	</ul>
+</nav>
+{{end}}
