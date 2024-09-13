@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: "HackNerdFont";
+	src: local("HackNerdFont-Regular"),
+		url('../fonts/HackNerdFont-Regular.ttf')
+}

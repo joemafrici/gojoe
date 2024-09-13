@@ -24,3 +24,6 @@ tmp
 *.njsproj
 *.sln
 *.sw?
+
+# binaries
+tailwindcss
