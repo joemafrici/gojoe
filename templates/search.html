@@ -1,7 +1,9 @@
 {{ define "content"}}
 <form hx-get="/search" hx-target="#search-results" hx-trigger="submit">
-	<input type="text" name="query" placeholder="Enter search query"></input>
-	<button type="submit">Search</button>
+	<input class="text-custom-green p-2 bg-ghost-white shadow rounded border-solid border-2 border-my-black" type="text"
+		name="query" placeholder="Enter search query"></input>
+	<button class=" p-2 bg-custom-green shadow rounded border-solid border-2 border-my-black"
+		type="submit">Search</button>
 </form>
 <div id="search-results"></div>
 {{end}}

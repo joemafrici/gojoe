@@ -6,6 +6,8 @@ import (
 	"io"
 	"log"
 	"net/http"
+
+	"golang.org/x/net/websocket"
 )
 
 type PageData struct {
@@ -20,12 +22,15 @@ type SearchResult struct {
 }
 
 func main() {
+	server := NewServer()
+	http.Handle("/ws/hmon", websocket.Handler(server.handleDataFeed))
 	port := ":7002"
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", logging(handleIndex))
 	http.HandleFunc("/projects", logging(handleProjects))
 	http.HandleFunc("/search", logging(handleSearch))
-	log.Println("Server listening on port ", port)
+	http.HandleFunc("/hmon", logging(handleHardwareMonitor))
+	log.Println("Server listening on port", port)
 	err := http.ListenAndServe(port, nil)
 	if err != nil {
 		log.Fatal("ListentAndServe:", err)
@@ -95,7 +100,7 @@ func handleSearch(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func fetchSearchResults(query string) ([]SearchResult, error) {
-	resp, err := http.Get("http://localhost:7878" + query)
+	resp, err := http.Get("http://search:7878" + query)
 	if err != nil {
 		log.Println("Get: ", err.Error())
 		return nil, err
@@ -113,6 +118,9 @@ func fetchSearchResults(query string) ([]SearchResult, error) {
 	return results, nil
 }
 
+func handleHardwareMonitor(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "hmon", PageData{})
+}
 func logging(f http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Received request %v for %v from %v\n", r.Method, r.RequestURI, r.RemoteAddr)

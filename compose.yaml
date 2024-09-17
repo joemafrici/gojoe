@@ -1,0 +1,13 @@
+services:
+  rproxy:
+    build: ../rproxy/
+    ports: 
+      - "3000:3000"
+  gojoe:
+    build: .
+    ports: 
+      - "8003:7002"
+  search:
+    build: ../search/search-engine/
+    ports: 
+      - "8004:7878"

@@ -1,0 +1,16 @@
+{{define "content"}}
+<div class="max-w-2xl mx-auto">
+	<h1 class="text-3xl font-bold mb-4">Hardware Monitor</h1>
+	<div id="hardware-stats" hx-ext="ws" ws-connect="/ws/hmon" hx-swap="innerHTML">
+		<!-- This div will be updated by the websocket -->
+	</div>
+</div>
+{{end}}
+{{define "hardware-stats"}}
+<ul id="hardware-stats">
+	<li>Memory Total: {{.MemTotal.Val}} GB - {{.MemTotal.Desc}}</li>
+	<li>Memory Available: {{.MemAvailable.Val}} GB - {{.MemAvailable.Desc}}</li>
+	<li>Memory Used: {{.MemUsedPercent.Val}}% - {{.MemUsedPercent.Desc}}</li>
+	<!-- Add more stats as needed -->
+</ul>
+{{end}}
