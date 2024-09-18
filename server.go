@@ -6,8 +6,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-
-	"golang.org/x/net/websocket"
 )
 
 type PageData struct {
@@ -23,7 +21,10 @@ type SearchResult struct {
 
 func main() {
 	server := NewServer()
-	http.Handle("/ws/hmon", websocket.Handler(server.handleDataFeed))
+	go server.Run()
+	go server.Writer()
+
+	http.HandleFunc("/ws/hmon", server.ServeWS)
 	port := ":7002"
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", logging(handleIndex))

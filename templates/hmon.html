@@ -1,13 +1,18 @@
 {{define "content"}}
 <div class="max-w-2xl mx-auto">
-	<h1 class="text-3xl font-bold mb-4">Hardware Monitor</h1>
-	<div id="hardware-stats" hx-ext="ws" ws-connect="/ws/hmon" hx-swap="innerHTML">
-		<!-- This div will be updated by the websocket -->
+	<h1 id="hardware-monitor" class="text-3xl font-bold mb-4">Hardware Monitor</h1>
+
+	<div id="hardware-stats" hx-ext="ws" ws-connect="/ws/hmon" hx-target="#update-timestamp">
+		<!-- This div will be updated by WebSocket messages -->
+		<div id="live-stats"></div>
 	</div>
+
 </div>
+
 {{end}}
 {{define "hardware-stats"}}
-<ul id="hardware-stats">
+<ul id="live-stats">
+	<li>Current Time: {{.CurrentTime}}</li>
 	<li>Memory Total: {{.MemTotal.Val}} GB - {{.MemTotal.Desc}}</li>
 	<li>Memory Available: {{.MemAvailable.Val}} GB - {{.MemAvailable.Desc}}</li>
 	<li>Memory Used: {{.MemUsedPercent.Val}}% - {{.MemUsedPercent.Desc}}</li>

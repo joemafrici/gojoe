@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/shirou/gopsutil/v4/mem"
+	"time"
 )
 
 func bytesToGB(bytes uint64) float64 {
@@ -13,6 +14,7 @@ type Stat struct {
 	Desc string
 }
 type SysInfo struct {
+	CurrentTime    time.Time
 	MemTotal       Stat
 	MemAvailable   Stat
 	MemUsedPercent Stat
@@ -36,6 +38,7 @@ func GetSysInfo() (SysInfo, error) {
 		return SysInfo{}, err
 	}
 	return SysInfo{
+		CurrentTime:    time.Now(),
 		MemTotal:       Stat{Val: bytesToGB(v.Total), Desc: "Total usable ram (i.e. physical ram minus a few reserved bits and the kernel binary code)"},
 		MemAvailable:   Stat{Val: bytesToGB(v.Available), Desc: "An estimate of how much memory is available for starting new applications, without swapping. Calculated from MemFree, SReclaimable, the size of the file LRU lists, and the low watermarks in each zone. The estimate takes into account that the system needs some page cache to function well, and that not all reclaimable slab will be reclaimable, due to items being in use. The impact of those factors will vary from system to system."},
 		MemUsedPercent: Stat{Val: v.UsedPercent, Desc: "Percentage of RAM used by programs This value is computed from the kernel specific values."},
