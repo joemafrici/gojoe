@@ -61,6 +61,7 @@ func (s *Server) Writer() {
 	defer ticker.Stop()
 
 	t := template.Must(template.ParseFiles("templates/hmon.html"))
+	log.Println("parsed hmon template")
 	for {
 		<-ticker.C
 		payload, err := GetSysInfo()

@@ -1,20 +1,47 @@
-{{ define "content"}}
-<form hx-get="/search" hx-target="#search-results" hx-trigger="submit">
-	<input class="text-custom-green p-2 bg-ghost-white shadow rounded border-solid border-2 border-my-black" type="text"
-		name="query" placeholder="Enter search query"></input>
-	<button class=" p-2 bg-custom-green shadow rounded border-solid border-2 border-my-black"
-		type="submit">Search</button>
-</form>
-<div id="search-results"></div>
+{{define "content"}}
+<div class="bg-[#f0f0f0] min-h-screen">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+		<h1 class="text-3xl font-bold mb-8 text-center text-[#615988]">Search</h1>
+
+		<div class="mb-8">
+			<form hx-get="/search" hx-target="#search-results" hx-trigger="submit">
+				<div class="flex">
+					<input type="text" name="query" placeholder="Enter your search query"
+						class="flex-grow p-2 border border-[#615988] rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#93ae6e]">
+					<button type="submit"
+						class="bg-[#615988] text-white px-4 py-2 rounded-r-lg hover:bg-[#93ae6e] transition duration-300">
+						Search
+					</button>
+				</div>
+			</form>
+		</div>
+
+		<div id="search-results">
+			<!-- Search results will be populated here -->
+		</div>
+	</div>
+</div>
 {{end}}
+
 {{define "search_results"}}
 {{if .}}
-<h2>Search Results</h2>
-{{range .}}
-<p>{{.Filename}} {{.Similarity}}</p>
-{{range .Snippets}}
-<p>{{.}}</p>
-{{end}}
-{{end}}
+<h2 class="text-2xl font-bold mb-4 text-[#615988]">Search Results</h2>
+<div class="grid grid-cols-1 gap-4 auto-rows-auto grid-flow-row-dense">
+	{{range .}}
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e] flex flex-col">
+		<h3 class="text-lg font-semibold mb-2 text-[#615988]">{{.Filename}}</h3>
+		<p class="text-sm font-bold text-[#93ae6e] mb-2">Similarity: {{printf "%.5f%%" .Similarity}}</p>
+		<div class="flex-grow">
+			{{range $index, $snippet :=.Snippets}} {{if ne $index 0}}
+			<hr class="my-2 border-gray-200">
+			{{end}}
+			<p class="text-xs text-gray-600">{{.}}</p>
+			{{end}}
+		</div>
+	</div>
+	{{end}}
+</div>
+{{else}}
+<p class="text-center text-[#615988]">No results found. Try a different search query.</p>
 {{end}}
 {{end}}

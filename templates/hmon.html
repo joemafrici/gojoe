@@ -1,8 +1,8 @@
 {{define "content"}}
-<div class="max-w-2xl mx-auto">
-	<h1 id="hardware-monitor" class="text-3xl font-bold mb-4">Hardware Monitor</h1>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+	<h1 class="text-3xl font-bold mb-8 text-center text-[#615988]">Hardware Monitor</h1>
 
-	<div id="hardware-stats" hx-ext="ws" ws-connect="/ws/hmon" hx-target="#update-timestamp">
+	<div id="hardware-stats" hx-ext="ws" ws-connect="/ws/hmon" target="#live-stats">
 		<!-- This div will be updated by WebSocket messages -->
 		<div id="live-stats"></div>
 	</div>
@@ -11,11 +11,101 @@
 
 {{end}}
 {{define "hardware-stats"}}
-<ul id="live-stats">
-	<li>Current Time: {{.CurrentTime}}</li>
-	<li>Memory Total: {{.MemTotal.Val}} GB - {{.MemTotal.Desc}}</li>
-	<li>Memory Available: {{.MemAvailable.Val}} GB - {{.MemAvailable.Desc}}</li>
-	<li>Memory Used: {{.MemUsedPercent.Val}}% - {{.MemUsedPercent.Desc}}</li>
-	<!-- Add more stats as needed -->
-</ul>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="live-stats">
+	<!-- Current Time -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Current Time</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{.CurrentTime.Format "2006-01-02 15:04:05"}}</p>
+	</div>
+
+	<!-- Memory Total -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Memory Total</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f GB" .MemTotal.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemTotal.Desc}}</p>
+	</div>
+
+	<!-- Memory Available -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Memory Available</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f GB" .MemAvailable.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemAvailable.Desc}}</p>
+	</div>
+
+	<!-- Memory Used -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Memory Used</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f%%" .MemUsedPercent.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemUsedPercent.Desc}}</p>
+		<div class="mt-3 bg-[#f0f0f0] rounded-full h-2">
+			<div class="bg-[#93ae6e] h-2 rounded-full" style="width: {{printf " %.2f%%" .MemUsedPercent.Val}}"></div>
+		</div>
+	</div>
+	<!-- Page Tables -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Page Table Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .MemPageTables.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemPageTables.Desc}}</p>
+	</div>
+	<!-- Memory Cached -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Cache Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .MemCached.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemCached.Desc}}</p>
+	</div>
+	<!-- High Memory -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Total High Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .MemHighTotal.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemHighTotal.Desc}}</p>
+	</div>
+	<!-- High Memory -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Free High Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .MemHighFree.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemHighFree.Desc}}</p>
+	</div>
+	<!-- Low Memory -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Total Low Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .MemLowTotal.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemLowTotal.Desc}}</p>
+	</div>
+	<!-- Low Memory -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Free Low Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .MemLowFree.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemLowFree.Desc}}</p>
+	</div>
+	<!-- Swap -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Total Swap Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .MemSwapTotal.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemSwapTotal.Desc}}</p>
+	</div>
+	<!-- Swap -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Free Swap Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .MemSwapFree.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemSwapFree.Desc}}</p>
+	</div>
+	<!-- Swap Cache -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Swap Cache</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .MemSwapCached.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.MemSwapCached.Desc}}</p>
+	</div>
+	<!-- Dirty -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Dirty Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .Dirty.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.Dirty.Desc}}</p>
+	</div>
+	<!-- Slab -->
+	<div class="bg-white rounded-lg shadow-md p-4 border-t-4 border-[#93ae6e]">
+		<h2 class="text-lg font-semibold mb-2 text-[#615988]">Slab Memory</h2>
+		<p class="text-xl font-bold text-[#93ae6e]">{{printf "%.2f" .Slab.Val}}</p>
+		<p class="mt-2 text-xs text-gray-600">{{.Slab.Desc}}</p>
+	</div>
+</div>
 {{end}}

@@ -31,6 +31,7 @@ func main() {
 	http.HandleFunc("/projects", logging(handleProjects))
 	http.HandleFunc("/search", logging(handleSearch))
 	http.HandleFunc("/hmon", logging(handleHardwareMonitor))
+	http.HandleFunc("/graph", logging(handleGraph))
 	log.Println("Server listening on port", port)
 	err := http.ListenAndServe(port, nil)
 	if err != nil {
@@ -121,6 +122,9 @@ func fetchSearchResults(query string) ([]SearchResult, error) {
 
 func handleHardwareMonitor(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "hmon", PageData{})
+}
+func handleGraph(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "graph", PageData{})
 }
 func logging(f http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {

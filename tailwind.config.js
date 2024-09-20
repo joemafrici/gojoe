@@ -10,6 +10,7 @@ module.exports = {
 				'ash-gray': '#b2beb5',
 				'ghost-white': '#f8f8ff',
 				'my-black': '#393e45',
+				'green-cyan': '#009966',
 			},
 			fontFamily: {
 				'hack': ['HackNerdFont', 'monospace'],
