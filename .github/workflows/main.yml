@@ -35,6 +35,8 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: |
         echo "$SSH_PRIVATE_KEY" > private_key
+        echo secrets.PRIVATE_KEY
+        echo secrets.SSH_HOST
         chmod 600 private_key
         ssh -o StrictHostKeyChecking=no -o ProxyCommand='cloudflared access ssh --hostname %h' -i private_key ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << EOF
           cd ~
