@@ -1,15 +1,69 @@
 {{define "content"}}
 <div class='max-w-2xl mx-auto'>
-	<h1 class='text-3xl font-bod mb-4'>gojoe</h1>
+	<h1 class='text-3xl font-bold mb-4'>Joe Mafrici</h1>
 	<p class='mb-4'>I have a degree in Software Engineering Technology and a minor in Applied Mathematics from the Oregon
-		Institute
-		of Technology. Hire me.</p>
-	<p class="mb-4">I also enjoy literature, philosophy and rock climbing</p>
+		Institute of Technology.</p>
+	<p class="mb-4">I also enjoy literature, philosophy and rock climbing.</p>
 	<div class="flex gap-1">
 		<img class="size-40" src="../static/img/rockclimbing_fall.jpg"
 			alt="Joe laying on back with legs in the air in rock climbing gym">
 		<img class="size-40" src="../static/img/rockclimbing_jump.jpg"
 			alt="Joe jumping across rock climing wall in rock climbing gym">
+	</div>
+	<div class="mt-4">
+		<h2 class="text-2xl font-bold mb-4">How This Site Is Made</h2>
+		<h3 class="text-xl font-bold mb-4">Core Technologies</h3>
+		<ul>
+			<li>Backend: Go</li>
+			<li>Frontend: HTMX + Tailwind</li>
+			<li>Hosting: Self-hosted</li>
+			<li>Hardware: Raspberry Pi 4</li>
+			<li>Networking: Cloudflare Tunnels</li>
+			<li>Deployment: Docker</li>
+		</ul>
+		<h3 class="text-xl font-bold mb-4 mt-4">Architecture Overview</h3>
+		<p class="mb-4">I built this site on a microservices architecture. It is comprised of multiple components that run
+			in their own containers. The key components are as follows:</p>
+		<h4 class="text-l font-bold mb-4">Go Server</h4>
+		<p class="mb-4">The heart of this site. I chose to write the server in Go because it has a robust http package as
+			part of it's standard library, and an easier to use concurrency model than using pthreads directly.. Go code also
+			compiles to a fast native binary. Looking into the history of the
+			language a little bit it seems like one of the primary reasons Go was created was for building servers at Google.
+			The server handles all backend logic including:
+		</p>
+		<ul>
+			<li>Handling HTTP Requests</li>
+			<li>Serving static files</li>
+			<li>Concurrently managing WebSocket connections</li>
+		</ul>
+		<h4 class="text-l font-bold mb-4">HTMX Frontend</h4>
+		<p class="mb-4">I am using a library called HTMX to build the front end web pages. Version 1.0 of this site was
+			actually written in React. I chose to do a rewrite to HTMX because I didn't understand what hypermedia meant.. I
+			wanted to learn this other way of writing a website and I had already created a React app, my encrypted messaging
+			app Argo.</p>
+		<h4 class="text-l font-bold mb-4">Raspberry Pi + Cloudflare Tunnel</h4>
+		<p class="mb-4">Version 1.0 of this site was hosted on Oracle Cloud using their free tier. It was a fine service and
+			I
+			am glad I learned how to set up a server with them.. I realized one day I had a Pi laying around that a friend
+			from
+			college gave me. I was initially hesitant to self host at my home since my understanding is that my ISP gives my
+			home an IP that is subject to changing (not good for someone who wants their site to be reachable.) Doing some
+			research I came across the Tunnel service that Cloudflare provides. It solved the non-static IP problem by using
+			their cloudflared daemon running on my PI to connect to Cloudflare's network. It also meant I don't have to open
+			any
+			ports on my home network, and it provides SSL/TLS for my so my server doesn't ahave to implement that itself
+			(something I was doing on the Oracle Cloud server.)</p>
+		<h4 class="text-l font-bold mb-4">Reverse Proxy</h4>
+		<p class="mb-4">I built a reverse proxy in Go to route requests to my various services running on the Pi. I've used
+			Nginx before but I chose to write my own to understand how they work. All requests first go through the reverse
+			proxy before getting passed on to the correct service. This allows me to have one app that logs all requests made
+			to
+			the site.</p>
+		<h4 class="text-l font-bold mb-4">Docker</h4>
+		<p class="mb-4">All the services are running in their own containers. Whenever I make a change to one of the
+			services
+			I rebuild the image and push to DockerHub. Then on the Pi I do a docker compose pull and now I have the most up to
+			date versions on my Pi.</p>
 	</div>
 	<div class='space-y-2'>
 		<a class='text-blue-600 hover:underline' href="https://github.com/joemafrici/">My GitHub Profile</a>

@@ -1,5 +1,4 @@
 function initializeGraph() {
-	console.log('initializing graph');
 	const ctx = document.getElementById('populationChart').getContext('2d');
 	if (!ctx) {
 		console.error('Cannot find canvas element');
@@ -33,7 +32,6 @@ function initializeGraph() {
 	let timeRangeMax2 = parseInt(timeRangeMax2Input.value);
 
 	function updateValues1() {
-		console.log('updateValues1 called');
 		growthRate1 = parseFloat(growthRate1Input.value);
 		growthRate1Value.textContent = growthRate1;
 		initialPopulation1 = parseInt(initialPopulation1Input.value);
@@ -50,7 +48,6 @@ function initializeGraph() {
 	}
 
 	function updateValues2() {
-		console.log('updateValues2 called');
 		growthRate2 = parseFloat(growthRate2Input.value);
 		growthRate2Value.textContent = growthRate2;
 		initialPopulation2 = parseInt(initialPopulation2Input.value);

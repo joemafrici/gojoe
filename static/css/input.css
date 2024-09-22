@@ -5,5 +5,31 @@
 @font-face {
 	font-family: "HackNerdFont";
 	src: local("HackNerdFont-Regular"),
-		url('../fonts/HackNerdFont-Regular.ttf')
+		url('../fonts/HackNerdFont-Regular.ttf');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "HackNerdFont";
+	src: local("HackNerdFont-Bold"),
+		url('../fonts/HackNerdFont-Bold.ttf');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "HackNerdFont";
+	src: local("HackNerdFont-Italic"),
+		url('../fonts/HackNerdFont-Italic.ttf');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "HackNerdFont";
+	src: local("HackNerdFont-BoldItalic"),
+		url('../fonts/HackNerdFont-BoldItalic.ttf');
+	font-weight: 700;
+	font-style: italic;
 }

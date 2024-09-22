@@ -1,25 +1,27 @@
 {{define "navbar"}}
 <nav class='bg-background-gray p-4'>
 	<div class='container mx-auto flex items-center'>
-		<a href="/" class="flex-shrink-0 mr-8">
+		<a href="/" hx-push-url="true" class="flex-shrink-0 mr-8">
 			<img class='h-8 w-auto' src='/static/img/gojo.svg' alt='Satoru Gojo'></img>
 		</a>
 		<ul class='flex space-x-4'>
 			<li>
-				<a class='hover:text-gray-600' href='/' hx-get="/" hx-target="#content">Home</a>
+				<a class='hover:text-gray-600' href='/' hx-get="/" hx-push-url="true" hx-target="#content">Home</a>
 			</li>
 			<li>
-				<a class='hover:text-gray-600' href='/projects' hx-get="/projects" hx-target="#content">Projects</a>
+				<a class='hover:text-gray-600' href='/projects' hx-get="/projects" hx-push-url="true"
+					hx-target="#content">Projects</a>
 			</li>
 			<li>
-				<a class='hover:text-gray-600' href='/search' hx-get="/search" hx-target="#content">Search</a>
+				<a class='hover:text-gray-600' href='/search' hx-get="/search" hx-push-url="true"
+					hx-target="#content">Search</a>
 			</li>
 			<li>
-				<a class='hover:text-gray-600' href="hmon" hx-ext="ws" hx-get="/hmon" hx-target="#content">Hardware
+				<a class='hover:text-gray-600' href="/hmon" hx-get="/hmon" hx-push-url="true" hx-target="#content">Hardware
 					Monitor</a>
 			</li>
 			<li>
-				<a class='hover:text-gray-600' href="graph" hx-ext="ws" hx-get="/graph" hx-target="#content">Graph</a>
+				<a class='hover:text-gray-600' href="/graph" hx-get="/graph" hx-push-url="true" hx-target="#content">Graph</a>
 			</li>
 		</ul>
 	</div>
