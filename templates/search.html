@@ -1,10 +1,21 @@
 {{define "content"}}
+<style>
+	.htmx-indicator {
+		display: none;
+	}
+
+	.htmx-request .htmx-indicator {
+		display: block;
+	}
+</style>
 <div class="bg-[#f0f0f0] min-h-screen">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 		<h1 class="text-3xl font-bold mb-8 text-center text-[#615988]">Search</h1>
+		<p>The dataset for this search engine is 150 episodes of The Tim Ferriss Show:</p>
+		<a href="https://tim.blog/podcast" class="text-blue-600 hover:text-blue-800 underline">tim.blog/podcast</a>
 
 		<div class="mb-8">
-			<form hx-get="/search" hx-target="#search-results" hx-trigger="submit">
+			<form hx-get="/search" hx-target="#search-results" hx-trigger="submit" hx-indicator="#loading-indicator">
 				<div class="flex">
 					<input type="text" name="query" placeholder="Enter your search query"
 						class="flex-grow p-2 border border-[#615988] rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#93ae6e]">
@@ -14,6 +25,11 @@
 					</button>
 				</div>
 			</form>
+			<div id="loading-indicator" class="htmx-indicator text-center mt-4">
+				<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#615988]">
+					<p class="text-[#615988] mt-2">Searching...</p>
+				</div>
+			</div>
 		</div>
 
 		<div id="search-results">
