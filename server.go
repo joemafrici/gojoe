@@ -102,8 +102,8 @@ func handleSearch(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func fetchSearchResults(query string) ([]SearchResult, error) {
-	//resp, err := http.Get("http://search:7878" + query)
-	resp, err := http.Get("http://localhost:7878" + query)
+	resp, err := http.Get("http://search:7878" + query)
+	//resp, err := http.Get("http://localhost:7878" + query)
 	if err != nil {
 		log.Println("Get: ", err.Error())
 		return nil, err
