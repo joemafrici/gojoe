@@ -3,98 +3,26 @@
 	<h1 class='text-3xl font-bold mb-4'>Joe Mafrici</h1>
 	<p class='mb-4'>I have a degree in Software Engineering Technology and a minor in Applied Mathematics from the Oregon
 		Institute of Technology.</p>
-	<p class="mb-4">I also enjoy literature, philosophy and rock climbing.</p>
-	<div class="flex">
-		<video width="426" height="240" controls>
-			<source src="../static/mov/whitev4_426x240.mov">
-		</video>
-		<video width="240" height="426" controls>
-			<source src="../static/mov/redv4_240x426.mov">
-		</video>
-	</div>
-	<div class="mt-4">
-		<h2 class="text-2xl font-bold mb-4">How This Site Is Made</h2>
-		<h3 class="text-xl font-bold mb-4">Core Technologies</h3>
-		<ul>
-			<li>Backend: Go</li>
-			<li>Frontend: HTMX + Tailwind</li>
-			<li>Hosting: Self-hosted</li>
-			<li>Hardware: Raspberry Pi 4</li>
-			<li>Networking: Cloudflare Tunnels</li>
-			<li>Deployment: Docker</li>
-		</ul>
-		<h3 class="text-xl font-bold mb-4 mt-4">Architecture Overview</h3>
-		<p class="mb-4">I built this site on a microservices architecture. It is comprised of multiple components that run
-			in their own containers. The key elements of this site are as follows:</p>
-		<div class="mb-4">
-			<h4 class="text-l font-bold mb-4">Go Server</h4>
-			<p class="mb-4">The heart of this site. I chose to write the server in Go because it has a robust http package
-				as
-				part of it's standard library, and an easier to use concurrency model than using pthreads directly.. Go code
-				also
-				compiles to a fast native binary. Looking into the history of the
-				language a little bit it seems like one of the primary reasons Go was created was for building servers at
-				Google.
-				The server handles all backend logic including:
-			</p>
-			<ul>
-				<li>Handling HTTP Requests</li>
-				<li>Serving static files</li>
-				<li>Concurrently managing WebSocket connections</li>
-			</ul>
-		</div>
-		<h4 class="text-l font-bold mb-4">HTMX Frontend</h4>
-		<p class="mb-4">I am using a library called HTMX to build the front end web pages. Version 1.0 of this site was
-			actually written in React. I chose to do a rewrite to HTMX because I didn't understand what hypermedia meant.. I
-			wanted to learn this other way of writing a website and I had already created a React app, my encrypted
-			messaging
-			app Argo.</p>
-		<h4 class="text-l font-bold mb-4">Search Engine</h4>
-		<p class="mb-4">This is a search engine I built in Rust. The dataset for the version running on this website is
-			150
-			episodes of The Tim Ferriss Show. It can build an index out of txt, pdf, and epub files. It uses an algorithm I
-			designed to compute the Term Frequency-Inverse Document Frequency for each word that appears in each document.
-			This is to determine the importance of each word to the document. When a user enters a search query it computes
-			the Cosine Similarity of the query and the vectorized tf-idf values for each document to determine the level of
-			relevance each document has to the query. Documents are then sorted in order of highest relevance first. A
-			snippet
-			is then create for each appearance of a query word in the document. Snippets contain some number of words before
-			and after the word in the document. This is so the user can see the context in which the word appears in the
-			document. The version of the search engine running on this website sends the results to the browser to be
-			displayed. There is also a CLI version that displays the results to the terminal.</p>
+	<p class="mb-4">I also like old books and rock climbing.</p>
 
-		<h4 class="text-l font-bold mb-4">Raspberry Pi + Cloudflare Tunnel</h4>
-		<p class="mb-4">Version 1.0 of this site was hosted on Oracle Cloud using their free tier. It was a fine service
-			and
-			I
-			am glad I learned how to set up a server with them.. I realized one day I had a Pi laying around that a friend
-			from
-			college gave me. I was initially hesitant to self host at my home since my understanding is that my ISP gives my
-			home an IP that is subject to changing (not good for someone who wants their site to be reachable.) Doing some
-			research I came across the Tunnel service that Cloudflare provides. It solved the non-static IP problem by using
-			their cloudflared daemon running on my PI to connect to Cloudflare's network. It also meant I don't have to open
-			any
-			ports on my home network, and it provides SSL/TLS for my so my server doesn't ahave to implement that itself
-			(something I was doing on the Oracle Cloud server.)</p>
-		<h4 class="text-l font-bold mb-4">Reverse Proxy</h4>
-		<p class="mb-4">I built a reverse proxy in Go to route requests to my various services running on the Pi. I've
-			used
-			Nginx before but I chose to write my own to understand how they work. All requests first go through the reverse
-			proxy before getting passed on to the correct service. This allows me to have one app that logs all requests
-			made
-			to
-			the site.</p>
-		<h4 class="text-l font-bold mb-4">Docker</h4>
-		<p class="mb-4">All the services are running in their own containers. Whenever I make a change to one of the
-			services
-			I rebuild the image and push to DockerHub. Then on the Pi I do a docker compose pull and now I have the most up
-			to
-			date versions on my Pi.</p>
-	</div>
-	<div class='space-y-2'>
-		<a class='text-blue-600 hover:underline' href="https://github.com/joemafrici/">My GitHub Profile</a>
-		<br></br>
-		<a class='text-blue-600 hover:underline block' href="https://x.com/joemafrici/">Follow me on X</a>
-	</div>
+	<ul>
+		<li>
+			<a class='hover:text-gray-600' href='/search' hx-get="/search" hx-push-url="true" hx-target="#content">Search
+				Engine</a>
+		</li>
+		<li>
+			<a class='hover:text-gray-600' href='/deployer' hx-get="/search" hx-push-url="true" hx-target="#content">Gapless
+				Deployment Utility</a>
+		</li>
+		<li>
+			<a class='hover:text-gray-600' href='/argo' hx-get="/argo" hx-push-url="true" hx-target="#content">End-To-End
+				Encrypted Messaging</a>
+		</li>
+		<li>
+			<a class='hover:text-gray-600' href='/gojoe' hx-get="/gojoe" hx-push-url="true" hx-target="#content">This
+				Website</a>
+		</li>
+	</ul>
+
 </div>
 {{end}}
