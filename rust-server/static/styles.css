@@ -1,0 +1,13 @@
+.accordian-content {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 500ms;
+}
+
+.accordian-content[aria-hidden="false"] {
+	grid-template-rows: 1fr;
+}
+
+.accordian-content>div {
+	overflow: hidden;
+}

@@ -27,3 +27,8 @@ tmp
 
 # binaries
 tailwindcss
+
+*.mov
+
+# Rust build files
+rust-server/target/

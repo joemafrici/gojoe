@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>gojoe</title>
+	<script defer src="/static/index.js"></script>
+	<link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+	<div class="wrapper">
+		<h1>Things I've Built</h2>
+			<!-- Credit to Kevin Powell for the accordian cool effect: https://codepen.io/kevinpowell/pen/NWOgVga -->
+			<div class="accordian">
+
+				<div class="accordian-panel">
+					<h2 id="panel1-title">
+						<button class="accordian-trigger" aria-expanded="false" aria-controls="accordian1-content">
+							Search Engine
+						</button>
+					</h2>
+					<div class="accordian-content" role="region" aria-labelledby="panel1-title" aria-hidden="true"
+						id="panel1-content">
+						<div>
+							<div>{{{search_content}}}</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="accordian-panel">
+					<h2 id="panel2-title">
+						<button class="accordian-trigger" aria-expanded="false" aria-controls="accordian2-content">
+							Gapless Deployment Utility
+						</button>
+					</h2>
+					<div class="accordian-content" role="region" aria-labelledby="panel2-title" aria-hidden="true"
+						id="panel2-content">
+						<div>
+							<div>{{{deployer_content}}}</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="accordian-panel">
+					<h2 id="panel3-title">
+						<button class="accordian-trigger" aria-expanded="false" aria-controls="accordian3-content">
+							End-To-End Encrypted Messaging App
+						</button>
+					</h2>
+					<div class="accordian-content" role="region" aria-labelledby="panel3-title" aria-hidden="true"
+						id="panel3-content">
+						<div>
+							<div>{{{argo_content}}}</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="accordian-panel">
+					<h2 id="panel4-title">
+						<button class="accordian-trigger" aria-expanded="false" aria-controls="accordian4-content">
+							This Website
+						</button>
+					</h2>
+					<div class="accordian-content" role="region" aria-labelledby="panel1-title" aria-hidden="true"
+						id="panel4-content">
+						<div>
+							<div>{{{gojoe_content}}}</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+	</div>
+</body>
+
+</html>
