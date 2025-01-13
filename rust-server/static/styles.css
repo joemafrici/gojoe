@@ -11,3 +11,24 @@
 .accordian-content>div {
 	overflow: hidden;
 }
+
+.accordian-panel {
+	border: 1px solid;
+	padding: 10px;
+	margin: 30px;
+	box-shadow: 5px 10px;
+	cursor: pointer;
+}
+
+.accordian-panel:hover {
+	background-color: gray;
+}
+
+.accordian-panel:focus {
+	background-color: gray;
+}
+
+.accordian-trigger {
+	background: none;
+	border: none;
+}
