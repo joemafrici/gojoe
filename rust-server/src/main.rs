@@ -1,4 +1,5 @@
 use axum::{extract::State, http::StatusCode, response::Html, routing::get, Router};
+use dirs;
 use handlebars::Handlebars;
 use serde_json::json;
 use std::fs;
@@ -32,20 +33,26 @@ async fn main() {
         .with(file_layer)
         .init();
 
-    let gojoe_readme = fs::read_to_string("/Users/deepwater/code/gojoe/README.md")
-        .expect("Should have been able to read gojoe README file");
+    let readme_path = dirs::home_dir().unwrap().join("code/gojoe/README.md");
+    let gojoe_readme =
+        fs::read_to_string(readme_path).expect("Should have been able to read gojoe README file");
     let gojoe_partial = markdown::to_html(gojoe_readme.as_str());
 
-    let search_readme = fs::read_to_string("/Users/deepwater/code/search/search-engine/README.md")
-        .expect("Should have been able to read search README file");
+    let readme_path = dirs::home_dir()
+        .unwrap()
+        .join("code/search/search-engine/README.md");
+    let search_readme =
+        fs::read_to_string(readme_path).expect("Should have been able to read search README file");
     let search_partial = markdown::to_html(search_readme.as_str());
 
-    let deployer_readme = fs::read_to_string("/Users/deepwater/code/go/deploy/README.md")
+    let readme_path = dirs::home_dir().unwrap().join("code/go/deploy/README.md");
+    let deployer_readme = fs::read_to_string(readme_path)
         .expect("Should have been able to read deployer README file");
     let deployer_partial = markdown::to_html(deployer_readme.as_str());
 
-    let argo_readme = fs::read_to_string("/Users/deepwater/code/argo/README.md")
-        .expect("Should have been able to read Argo README file");
+    let readme_path = dirs::home_dir().unwrap().join("code/argo/README.md");
+    let argo_readme =
+        fs::read_to_string(readme_path).expect("Should have been able to read Argo README file");
     let argo_partial = markdown::to_html(argo_readme.as_str());
 
     let data = json!({
@@ -55,11 +62,11 @@ async fn main() {
         "argo_content": argo_partial,
     });
     let mut reg = Handlebars::new();
-    reg.register_template_file(
-        "index",
-        "/Users/deepwater/code/gojoe/rust-server/static/index.html",
-    )
-    .expect("Should have been able to register index template");
+    let template_file_path = dirs::home_dir()
+        .unwrap()
+        .join("code/gojoe/rust-server/static/index.html");
+    reg.register_template_file("index", template_file_path)
+        .expect("Should have been able to register index template");
     // reg.render_template(template_string, data);
     let rendered = reg
         .render("index", &data)
